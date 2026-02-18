@@ -4,19 +4,20 @@ public:
         int low = 0;
         int high = nums.size() - 1;
 
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-
-            if (nums[mid] < nums[mid + 1]) {
-                
-                low = mid + 1;
-            } 
-            else {
-                
-                high = mid;
+        if (low==high){
+            return low;
+        } 
+        else if(nums[0]>nums[1]){
+            return 0;
+        } 
+        else if(nums[high]>nums[high-1]){
+            return high;
+        }
+        for(int i=1; i<high; i++){
+            if(nums[i]>nums[i-1] && nums[i]>nums[i+1]){
+                return i;
             }
         }
-
-        return low;  
+        return -1;
     }
 };
