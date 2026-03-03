@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int maxConsecutiveAnswers(string answerKey, int k) {
+        unordered_map<char,int>freq;
+        int max_freq=0, ans=0, i=0, j=0;
+
+        int n=answerKey.size();
+
+        if(n<=k) return n;
+
+        while(j<n){
+
+            freq[answerKey[j]]++;
+
+            max_freq = max(max_freq, freq[answerKey[j]]);
+
+            while((j-i+1)-max_freq > k){
+                freq[answerKey[i]]--;
+                i++;
+            }
+
+            ans = max(ans, j-i+1);
+            j++;
+        }
+
+        return ans;
+    }
+};
