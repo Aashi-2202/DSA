@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool threeConsecutiveOdds(vector<int>& arr) {
+        
+        int j=0;
+        int n = arr.size();
+        bool ans = false;
+
+        while(j<n-2)
+        {
+            if(arr[j]%2!=0 && arr[j+1]%2!=0 && arr[j+2]%2!=0)
+            {
+                ans=true;
+                break;
+            }
+            j++;
+        }
+        return ans;
+    }
+
+};
