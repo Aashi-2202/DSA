@@ -1,0 +1,44 @@
+class Solution {
+  public:
+    int getMaxArea(vector<int> &arr) {
+        // code here
+        stack<int> st;
+        vector<int> ans;
+        
+        int n=arr.size(), maxArea=0;
+        
+        if(n==1) return arr[0];
+        
+        for(int i=0; i<=n; i++)
+        {
+            int currHeight;
+            if(i == n)
+                currHeight = 0;
+            else
+                currHeight = arr[i];
+            
+            while(!st.empty() && currHeight < arr[st.top()])
+            {
+                int height=arr[st.top()];
+                st.pop();
+                
+                int width;
+                
+                if(st.empty())
+                {
+                    width =i;
+                }
+                else
+                {
+                    width = i-st.top()-1;
+                }
+                
+                maxArea = max(maxArea, height * width);
+            }
+            
+            st.push(i);
+        }
+        
+        return maxArea;
+    }
+};
