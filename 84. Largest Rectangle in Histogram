@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& arr) {
+        
+        int maxArea=0;
+        int n=arr.size();
+        stack<pair<int,int>> st;
+
+
+        for(int i=0; i<n; i++)
+        {
+            int start = i;
+            while(!st.empty() && st.top().first>arr[i])
+            {
+                pair<int,int> p = st.top();
+                st.pop();
+                maxArea = max(maxArea, p.first*(i-p.second));
+                start = p.second;
+            }
+
+            st.push({arr[i], start});
+        }
+
+        while(!st.empty())
+        {
+            maxArea = max(maxArea, st.top().first*(n-st.top().second));
+            st.pop();
+        }
+
+        return maxArea;
+    }
+    
+};
