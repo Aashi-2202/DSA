@@ -1,0 +1,25 @@
+class Solution {
+  public:
+    int maxChildren(vector<int> &greed, vector<int> &cookie) {
+        // code here
+        int i = 0, j=0;
+        
+        
+        sort(greed.begin(), greed.end());
+        sort(cookie.begin(), cookie.end());
+        
+        while(i<greed.size() && j<cookie.size())
+        {
+            if(cookie[j] >= greed[i])
+            {
+                i++;
+                j++;
+            }
+            else if(cookie[j] < greed[i])
+            {
+                j++;
+            }
+        }
+        return i;
+    }
+};
