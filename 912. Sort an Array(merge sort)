@@ -1,0 +1,74 @@
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        
+        MergeSort(0,nums.size()-1,nums);
+    
+        return nums;
+    }
+
+    void MergeSort(int start, int end, vector<int>& arr)
+    {
+        if(start>=end)
+        {
+            return;
+        }
+
+        int mid = start + (end-start)/2;
+
+        MergeSort(start, mid, arr);
+
+        MergeSort(mid+1, end, arr);
+
+        Merge(start, mid, end, arr);
+    }
+
+    void Merge(int start, int mid, int end, vector<int>& arr)
+    {
+
+        vector<int> arr1, arr2;
+
+        for(int i=start; i<=mid; i++)
+        {
+            arr1.push_back(arr[i]);
+        }
+
+        for(int j=mid+1; j<=end; j++)
+        {
+            arr2.push_back(arr[j]);
+        }
+
+        int i=0, j=0, k=start;
+
+        while(i<arr1.size() && j<arr2.size())
+        {
+            if(arr1[i]<=arr2[j])
+            {
+                arr[k]=arr1[i];
+                i++;
+                k++;
+            }
+            else{
+                arr[k]=arr2[j];
+                j++;
+                k++;
+            }
+        }
+
+        while(i<arr1.size()){
+            arr[k]=arr1[i];
+                i++;
+                k++;
+        }
+
+        while(j<arr2.size()){
+            arr[k]=arr2[j];
+                j++;
+                k++;
+        }
+    }
+
+
+
+    
+};
