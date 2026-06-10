@@ -1,0 +1,35 @@
+class Solution {
+  public:
+    bool isProduct(vector<int>& arr, long long target) {
+        // code here
+        sort(arr.begin(), arr.end());
+        
+        int start = 0;
+        
+        int end = arr.size()-1;
+        
+        while(start<end)
+        {
+            
+            long long prod = 1LL * arr[start] * arr[end];
+            
+            if(prod == target)
+            {
+                return true;
+                break;
+            }
+            
+            else if(prod < target)
+            {
+                start++;
+            }
+            
+            else
+            {
+                end--;
+            }
+        }
+        
+        return false;
+    }
+};
