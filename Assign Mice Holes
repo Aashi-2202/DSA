@@ -1,0 +1,33 @@
+class Solution {
+  public:
+    int assignHole(vector<int>& mices, vector<int>& holes) {
+        // code here
+        
+        sort(mices.begin(), mices.end());
+        
+        sort(holes.begin(), holes.end());
+        
+        int i=0,j=0, move1=0, move2=0;
+        
+        while(i<mices.size())
+        {
+            if(mices[i]>holes[j])
+            {
+                int diff=mices[i]-holes[j];
+                move1 = max(move1,diff);
+            }
+            else if(mices[i]<=holes[j])
+            {
+                int diff=holes[i]-mices[j];
+                move2 = max(move2,diff);
+            }
+            
+            i++;
+            j++;
+        }
+        
+        return max(move1,move2);
+        
+        
+    }
+};
