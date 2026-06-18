@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int partitionString(string s) {
+
+        unordered_map <char, int> mp;
+
+        int count=1;
+
+        int i=0;
+
+        while(i<s.size())
+        {
+            if(mp.count(s[i])!=0)
+            {
+                count++;
+
+                mp = unordered_map<char, int>(); //reset the map to 0
+
+                mp[s[i]] = 1;
+            }
+            else
+            {
+                mp[s[i]] = 1;
+            }
+
+            i++;
+        }
+
+        return count;
+        
+    }
+};
