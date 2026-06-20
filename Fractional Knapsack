@@ -1,0 +1,44 @@
+struct worth{
+    int index;
+    double unitVal;
+};
+
+bool comp(const worth& a, const worth& b){
+    return a.unitVal > b.unitVal;
+}
+
+
+class Solution {
+  public:
+    double fractionalKnapsack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        
+        vector<worth> Worths;
+        
+        for(int i=0; i<val.size(); i++){
+            Worths.push_back({i, (double)val[i] / wt[i]});
+        }
+        
+        sort(Worths.begin(), Worths.end(), comp);
+        
+        
+        double profit = 0;
+        
+        for(int i=0; i<Worths.size(); i++) {
+            
+            if(capacity <= 0) break;
+            
+            int w = Worths[i].index;
+            
+            if(wt[w] <= capacity) {
+                profit += val[w];
+                capacity -= wt[w];
+            } else {
+                profit += Worths[i].unitVal * capacity;
+                capacity = 0;
+            }
+        }
+        
+        return profit;
+    }
+};
