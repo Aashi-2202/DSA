@@ -1,0 +1,52 @@
+struct inter {
+    int start;
+    int end;
+};
+
+bool comp(const inter& a, const inter& b) { 
+    if(a.start == b.start){
+        return a.end < b.end;
+    }
+
+    return a.start < b.start; 
+}
+
+
+class Solution {
+public:
+    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+
+        vector<inter> vals;
+
+        //entering values in struct
+        for (int i = 0; i < intervals.size(); i++) {
+            inter temp;
+            temp.start = intervals[i][0];
+            temp.end = intervals[i][1];
+
+            vals.push_back(temp);
+        }
+
+        sort(vals.begin(), vals.end(), comp);
+
+        int  j=1, count=0;
+
+        int minEnd = vals[0].end;
+
+        while(j < vals.size()){ 
+            if(minEnd <= vals[j].start){ //check if no overlap
+                minEnd = vals[j].end; 
+            }
+            else{
+                count++;
+                minEnd = min(minEnd, vals[j].end); //When two intervals overlap, you remove the one with the larger end
+            }
+
+            j++;
+
+        }
+
+        return count;
+        
+    }
+};
