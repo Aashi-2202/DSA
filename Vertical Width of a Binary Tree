@@ -1,0 +1,41 @@
+/*
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int x) {
+        data = x;
+        left = right = NULL;
+    }
+};
+*/
+class Solution {
+  public:
+  
+    unordered_set<int> distance;
+    
+    int verticalWidth(Node* root) {
+        // code here
+        int count = 0;
+        
+        horizontalDist(root, count);
+        
+        return distance.size();
+    }
+    
+    void horizontalDist(Node* root, int count){
+        if(root == nullptr){
+            return;
+        }
+        
+        
+        distance.insert(count); //set only inserts uniques elements, repetead elements not added
+        
+        
+        horizontalDist(root->left, count-1);
+        
+        horizontalDist(root->right, count+1);
+    }
+};
